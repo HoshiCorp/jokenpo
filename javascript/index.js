@@ -1,4 +1,5 @@
 const btnArea = document.getElementById("btn-area");
+const result = document.getElementById("resultText");
 
 function randomResult() {
     return Math.floor(Math.random() * 3);
@@ -10,7 +11,14 @@ btnArea.addEventListener("click", event => {
     
     let computerAttack = randomResult();
 
-    chooseWinner(event.target.value, computerAttack);
+    result.classList.add("fadeOut");
+
+    setTimeout(()=> {
+        result.textContent = chooseWinner(event.target.value, computerAttack);
+        result.classList.remove("fadeOut");
+
+    }, 1000)
+    
     
 })
 
@@ -18,14 +26,14 @@ btnArea.addEventListener("click", event => {
 function chooseWinner(playerResult, computerResult) {
     
     if (playerWin(playerResult, computerResult)) {
-        window.alert("Você ganhou miserável!");
+        return "Ganhou";
         
         
     } else if (computerWin(computerResult, playerResult)) {
-        window.alert("CHUPA HA!");
+        return "Perdeu";
 
     } else {
-        window.alert("AFF!");
+        return "Velha";
 
     }
 }
